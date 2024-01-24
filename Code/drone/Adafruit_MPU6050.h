@@ -25,7 +25,7 @@
 
 #define MPU6050_I2CADDR_DEFAULT                                                \
   0x68                         ///< MPU6050 default i2c address w/ AD0 high
-#define MPU6050_DEVICE_ID 0x98 ///< The correct MPU6050_WHO_AM_I value
+#define MPU6050_DEVICE_ID 0x0 ///< The correct MPU6050_WHO_AM_I value
 
 #define MPU6050_SELF_TEST_X                                                    \
   0x0D ///< Self test factory calibrated values register
