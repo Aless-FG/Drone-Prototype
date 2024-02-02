@@ -1,19 +1,3 @@
-/*
-  Arduino LSM6DS3 - Simple Accelerometer
-
-  This example reads the acceleration values from the LSM6DS3
-  sensor and continuously prints them to the Serial Monitor
-  or Serial Plotter.
-
-  The circuit:
-  - Arduino Uno WiFi Rev 2 or Arduino Nano 33 IoT
-
-  created 10 Jul 2019
-  by Riccardo Rizzo
-
-  This example code is in the public domain.
-*/
-
 #include <Arduino_LSM6DS3.h>
 #include <Math.h>
 #include <MadgwickAHRS.h>
@@ -37,6 +21,8 @@ int in6 = 2;
 int enD = 10;
 int in7 = 11;
 int in8 = 12;
+
+// Pitch and Roll
 double rollSetpoint, rollInput, rollOutput;
 double pitchSetpoint, pitchInput, pitchOutput;
 
@@ -46,6 +32,9 @@ int targetSpeed[4];
 PID pitchPID(&rollInput, &rollOutput, &rollSetpoint, consKp, consKi, consKd, DIRECT);
 PID rollPID(&pitchInput, &pitchOutput, &pitchSetpoint, consKp, consKi, consKd, DIRECT);
 Madgwick filter;
+
+
+
 void setup() {
   filter.begin(10);
   Serial.begin(9600);
@@ -62,7 +51,8 @@ void setup() {
     targetSpeed[i] = 0;
   } 
 
-  pinMode(enA, OUTPUT);
+	// Set all the motor control pins to outputs
+	pinMode(enA, OUTPUT);
 	pinMode(enB, OUTPUT);
 	pinMode(enC, OUTPUT);
 	pinMode(enD, OUTPUT);
@@ -76,7 +66,8 @@ void setup() {
 	pinMode(in7, OUTPUT);
 	pinMode(in8, OUTPUT);
 
-  digitalWrite(in1, LOW);
+	// Turn off motors - Initial state
+	digitalWrite(in1, LOW);
 	digitalWrite(in2, LOW);
 	digitalWrite(in3, LOW);
 	digitalWrite(in4, LOW);
@@ -92,35 +83,43 @@ void setup() {
 
     while (1);
   }
-
-  Serial.print("Accelerometer sample rate = ");
-  Serial.print(IMU.accelerationSampleRate());
-  Serial.println(" Hz");
+	
+  Serial.print("Accelerometer reading...");
+  Serial.print("Gyroscope reading...");
+  Serial.print("Temperature reading in Celsius...");
   Serial.println();
-  Serial.println("Acceleration in g's");
-  Serial.println("X\tY\tZ");
 }
 
 void loop() {
   char buffer[5];
-  float x, y, z;
-  float xg, yg, zg;
-  for (int i = 0; i < 4; i++) {
-      targetSpeed[i] = 35;
+  float x_acc, y_acc, z_acc;
+  float x_gyro, y_gyro, z_gyro;
+  float t;
+  
+  // Turn on motors
+	digitalWrite(in1, LOW);
+	digitalWrite(in2, HIGH);
+	digitalWrite(in3, LOW);
+	digitalWrite(in4, HIGH);
+ 
+	digitalWrite(in5, LOW);
+	digitalWrite(in6, HIGH);
+	digitalWrite(in7, LOW);
+	digitalWrite(in8, HIGH);
+	
+	for (int i = 0; i < 4; i++) {
+      targetSpeed[i] = 25;
     }
-  if (IMU.gyroscopeAvailable() && IMU.accelerationAvailable()) {
-    IMU.readGyroscope(xg, yg, zg);
-    IMU.readAcceleration(x, y, z);
-    filter.updateIMU(xg,yg,zg, x,y,z);
-
-    //Serial.print(dtostrf(filter.getRoll(), 4, 0, buffer));
-    //Serial.print(dtostrf(filter.getPitch(), 4, 0, buffer));
-    //Serial.print(dtostrf(filter.getYaw(), 4, 0, buffer));
-    //Serial.println("");
+	
+	if (IMU.gyroscopeAvailable() && IMU.accelerationAvailable()) {
+    IMU.readGyroscope(x_gyro, y_gyro, z_gyro);
+    IMU.readAcceleration(x_acc, y_acc, z_acc);
+    filter.updateIMU(x_gyro, y_gyro, z_gyro, x_acc, y_acc, z_acc);
+	t = (IMU.readTemperature(t)/512.0)+23;
+	
     String rollInputString = (dtostrf(filter.getRoll(), 4, 0, buffer));
     String pitchInputString = (dtostrf(filter.getPitch(), 4, 0, buffer));
-    //Serial.println(rollInputString);
-    //Serial.println(pitchInputString);
+	
     rollInput = atof(rollInputString.c_str());
     pitchInput = atof(pitchInputString.c_str());
 
@@ -129,21 +128,33 @@ void loop() {
     rollPID.Compute();
     int actSpeed[4];
     stabilise (targetSpeed, actSpeed, rollOutput, pitchOutput);
-  }
+	
+	// Invio dei valori
+	Serial.println(String(x_acc)+";"+String(y_acc)+";"+String(z_acc)+";"
+                   +String(x_gyro)+";"+String(y_gyro)+";"+String(z_gyro)+";"+String(t)+";"
+				   +String(actSpeed[0])+";"+String(actSpeed[1])+";"+String(actSpeed[2])+";"+String(actSpeed[3]));
+	}
+	delay(50);
   
 }
 
 void stabilise (int* currSpeed, int* actSpeed, float rollDiff, float pitchDiff) {
   //actual Speed is calculated as follows +- half rollDiff +- half pitchDiff
-  actSpeed[0] = (int) currSpeed[0] + (rollDiff / 2) - (pitchDiff / 2);
-  
+  /*actSpeed[0] = (int) currSpeed[0] + (rollDiff / 2) - (pitchDiff / 2);
   actSpeed[1] = (int) currSpeed[1] + (rollDiff / 2) + (pitchDiff / 2);
   actSpeed[2] = (int) currSpeed[2] - (rollDiff / 2) + (pitchDiff / 2);
-  actSpeed[3] = (int) currSpeed[3] - (rollDiff / 2) - (pitchDiff / 2);
-  Serial.println(actSpeed[0]);
-  Serial.println(actSpeed[1]);
-  Serial.println(actSpeed[2]);
-  Serial.println(actSpeed[3]);
+  actSpeed[3] = (int) currSpeed[3] - (rollDiff / 2) - (pitchDiff / 2);*/
+
+  actSpeed[0] = (int) currSpeed[0] - (rollDiff / 2) - (pitchDiff / 2);
+  actSpeed[1] = (int) currSpeed[1] - (rollDiff / 2) + (pitchDiff / 2);
+  actSpeed[2] = (int) currSpeed[2] + (rollDiff / 2) - (pitchDiff / 2);
+  actSpeed[3] = (int) currSpeed[3] + (rollDiff / 2) + (pitchDiff / 2);
+  
+  analogWrite(enA, actSpeed[0]);
+  analogWrite(enB, actSpeed[1]);
+  analogWrite(enC, actSpeed[2]);
+  analogWrite(enD, actSpeed[3]);
+  
   for (int i = 0; i < 4; i ++) {
     if (actSpeed[i] < 0) 
       actSpeed[i] = 0;  
