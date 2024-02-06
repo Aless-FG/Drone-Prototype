@@ -2,7 +2,9 @@
 #include <Math.h>
 #include <MadgwickAHRS.h>
 #include <PID_v1.h>
+#include <WiFiNINA.h>
 
+// Motor A connections
 int enA = 9;
 int in1 = 8;
 int in2 = 7;
@@ -33,6 +35,11 @@ PID pitchPID(&rollInput, &rollOutput, &rollSetpoint, consKp, consKi, consKd, DIR
 PID rollPID(&pitchInput, &pitchOutput, &pitchSetpoint, consKp, consKi, consKd, DIRECT);
 Madgwick filter;
 
+// Connection section
+const char* ssid = "AndroidAP_1632";
+const char* password = "forzafoggia";
+const uint16_t port = 8000;
+WiFiServer wifiServer(port);
 
 
 void setup() {
@@ -44,6 +51,25 @@ void setup() {
   rollSetpoint = 0.0;
   pitchPID.SetMode(AUTOMATIC);
   rollPID.SetMode(AUTOMATIC);
+
+  WiFi.begin(ssid,password);
+
+  if (WiFi.status() == WL_NO_MODULE){
+    Serial.println("Comunicazione fallita");
+    while(true);
+  }
+  Serial.println("Connessione....");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("\n");
+  Serial.println("Connesso!");
+  //Serial.println("IP: ");
+  //Serial.println(WiFi.localIP());
+  wifiServer.begin();
 
   pitchPID.SetOutputLimits(-20, 20);
   rollPID.SetOutputLimits(-20, 20);
@@ -84,10 +110,12 @@ void setup() {
     while (1);
   }
 	
+  /*
   Serial.print("Accelerometer reading...");
   Serial.print("Gyroscope reading...");
   Serial.print("Temperature reading in Celsius...");
   Serial.println();
+  */
 }
 
 void loop() {
@@ -95,6 +123,7 @@ void loop() {
   float x_acc, y_acc, z_acc;
   float x_gyro, y_gyro, z_gyro;
   float t;
+  WiFiClient client = wifiServer.available();
   
   // Turn on motors
 	digitalWrite(in1, LOW);
@@ -111,11 +140,12 @@ void loop() {
       targetSpeed[i] = 25;
     }
 	
-	if (IMU.gyroscopeAvailable() && IMU.accelerationAvailable()) {
+	if (IMU.gyroscopeAvailable() && IMU.accelerationAvailable() && client) {
+    //Serial.println("Client remoto connesso");
     IMU.readGyroscope(x_gyro, y_gyro, z_gyro);
     IMU.readAcceleration(x_acc, y_acc, z_acc);
     filter.updateIMU(x_gyro, y_gyro, z_gyro, x_acc, y_acc, z_acc);
-	t = (IMU.readTemperature(t)/512.0)+23;
+	  t = (IMU.readTemperature(t)/512.0)+23;
 	
     String rollInputString = (dtostrf(filter.getRoll(), 4, 0, buffer));
     String pitchInputString = (dtostrf(filter.getPitch(), 4, 0, buffer));
@@ -123,16 +153,19 @@ void loop() {
     rollInput = atof(rollInputString.c_str());
     pitchInput = atof(pitchInputString.c_str());
 
-    
     pitchPID.Compute();
     rollPID.Compute();
     int actSpeed[4];
     stabilise (targetSpeed, actSpeed, rollOutput, pitchOutput);
 	
-	// Invio dei valori
-	Serial.println(String(x_acc)+";"+String(y_acc)+";"+String(z_acc)+";"
+	  // Invio dei valori
+	  Serial.println(String(x_acc)+";"+String(y_acc)+";"+String(z_acc)+";"
                    +String(x_gyro)+";"+String(y_gyro)+";"+String(z_gyro)+";"+String(t)+";"
-				   +String(actSpeed[0])+";"+String(actSpeed[1])+";"+String(actSpeed[2])+";"+String(actSpeed[3]));
+				           +String(actSpeed[0])+";"+String(actSpeed[1])+";"+String(actSpeed[2])+";"+String(actSpeed[3]) + ";" + String(rollInput) + ";" + String(pitchInput));
+
+
+    wifiServer.print(String(rollInput) + ";" + String(pitchInput));
+    delay(100);
 	}
 	delay(50);
   
@@ -140,10 +173,12 @@ void loop() {
 
 void stabilise (int* currSpeed, int* actSpeed, float rollDiff, float pitchDiff) {
   //actual Speed is calculated as follows +- half rollDiff +- half pitchDiff
-  /*actSpeed[0] = (int) currSpeed[0] + (rollDiff / 2) - (pitchDiff / 2);
+  /*
+  actSpeed[0] = (int) currSpeed[0] + (rollDiff / 2) - (pitchDiff / 2);
   actSpeed[1] = (int) currSpeed[1] + (rollDiff / 2) + (pitchDiff / 2);
   actSpeed[2] = (int) currSpeed[2] - (rollDiff / 2) + (pitchDiff / 2);
-  actSpeed[3] = (int) currSpeed[3] - (rollDiff / 2) - (pitchDiff / 2);*/
+  actSpeed[3] = (int) currSpeed[3] - (rollDiff / 2) - (pitchDiff / 2);
+  */
 
   actSpeed[0] = (int) currSpeed[0] - (rollDiff / 2) - (pitchDiff / 2);
   actSpeed[1] = (int) currSpeed[1] - (rollDiff / 2) + (pitchDiff / 2);

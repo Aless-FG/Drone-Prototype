@@ -28,7 +28,7 @@ inel = pygame.image.load("./Ring.png").convert_alpha()
 interior = pygame.image.load("./Interior.png").convert_alpha()
 
 
-ser = serial.Serial('/dev/ttyACM0', 9800, timeout=1)
+ser = serial.Serial('COM4', 9800, timeout=1)
 time.sleep(2)
 lista = [];
 while True:
