@@ -43,8 +43,11 @@ if __name__ == '__main__':
         values = data.split(";")
         if len(values) == 2:
             print('Pitch ' + values[0] + ' Roll ' + values[1])
-            draw_window(float(values[0]), float(values[1]), scale_factor)
-        time.sleep(0.5)
+            draw_window(float(values[1]), float(values[0]), scale_factor)
+        else:
+            print('Pitch ' + values[0] + ' Roll ' + values[-1])
+            draw_window(float(values[-1]), float(values[0]), scale_factor)
+
 
     client_socket.close()  # close the connection
 
