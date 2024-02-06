@@ -55,20 +55,22 @@ void setup() {
   WiFi.begin(ssid,password);
 
   if (WiFi.status() == WL_NO_MODULE){
-    Serial.println("Comunicazione fallita");
+    Serial.println("Communication failed!");
     while(true);
   }
-  Serial.println("Connessione....");
-
+  
+  /*
+  Serial.println("Connecting...");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
+  
   Serial.println("\n");
-  Serial.println("Connesso!");
-  //Serial.println("IP: ");
-  //Serial.println(WiFi.localIP());
+  Serial.println("Connected!");
+  Serial.println("IP: ");
+  Serial.println(WiFi.localIP());
+  */
   wifiServer.begin();
 
   pitchPID.SetOutputLimits(-20, 20);
@@ -159,13 +161,12 @@ void loop() {
     stabilise (targetSpeed, actSpeed, rollOutput, pitchOutput);
 	
 	  // Invio dei valori
-	  Serial.println(String(x_acc)+";"+String(y_acc)+";"+String(z_acc)+";"
+	  wifiServer.print(String(x_acc)+";"+String(y_acc)+";"+String(z_acc)+";"
                    +String(x_gyro)+";"+String(y_gyro)+";"+String(z_gyro)+";"+String(t)+";"
-				           +String(actSpeed[0])+";"+String(actSpeed[1])+";"+String(actSpeed[2])+";"+String(actSpeed[3]) + ";" + String(rollInput) + ";" + String(pitchInput));
+				           +String(actSpeed[0])+";"+String(actSpeed[1])+";"+String(actSpeed[2])+";"+String(actSpeed[3]) + ";" + String(rollInput) + ";" + String(pitchInput) + "a");
 
-
-    wifiServer.print(String(rollInput) + ";" + String(pitchInput));
-    delay(100);
+    //wifiServer.print(String(rollInput) + ";" + String(pitchInput));
+    
 	}
 	delay(50);
   
