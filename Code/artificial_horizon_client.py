@@ -40,13 +40,14 @@ if __name__ == '__main__':
     while message.lower().strip() != 'bye':
         client_socket.send(message.encode())  # send message
         data = client_socket.recv(1024).decode()  # receive response
-        values = data.split(";")
-        if len(values) == 2:
-            print('Pitch ' + values[0] + ' Roll ' + values[1])
+        valuesComplete = data.split("a")
+        values = valuesComplete[0].split(";")
+        if len(values) == 13:
+            print('Roll ' + values[12] + ' Pitch ' + values[11])
+            draw_window(float(values[12]), float(values[11]), scale_factor)
+        elif len(values) == 2:
+            print('Roll ' + values[1] + ' Pitch ' + values[0])
             draw_window(float(values[1]), float(values[0]), scale_factor)
-        else:
-            print('Pitch ' + values[0] + ' Roll ' + values[-1])
-            draw_window(float(values[-1]), float(values[0]), scale_factor)
 
 
     client_socket.close()  # close the connection
