@@ -32,5 +32,5 @@ Tramite Python viene implementato un Artificial Horizon, un componente grafico c
 # Autori & Contatti
 | Name | Description |
 | --- | --- |
-| <p dir="auto"><strong>Alessandro Ricchetti</strong> |<br>Developer - <a href="https://github.com/Aless-FG">Aless-FG</a></p><p dir="auto">Email - <a href="mailto:a.ricchetti1@studenti.unisa.it">a.ricchetti1@studenti.unisa.it</a></p><p dir="auto">LinkedIn - <a href="hhttps://www.linkedin.com/in/alessandro-ricchetti-832074275/">Alessandro Ricchetti</a></p><br>|
+| <p dir="auto"><strong>Alessandro Ricchetti</strong> |<br>Developer - <a href="https://github.com/Aless-FG">Aless-FG</a></p><p dir="auto">Email - <a href="mailto:a.ricchetti1@studenti.unisa.it">a.ricchetti1@studenti.unisa.it</a></p><p dir="auto">LinkedIn - <a href="https://www.linkedin.com/in/alessandro-ricchetti-832074275/">Alessandro Ricchetti</a></p><br>|
 | <p dir="auto"><strong>Alessandro Macaro</strong> |<br>Developer   - <a href="https://github.com/mtolkien">mtolkien</a></p><p dir="auto">Email - <a href="mailto:a.macaro@studenti.unisa.it">a.macaro@studenti.unisa.it</a></p><p dir="auto">LinkedIn - <a href="https://www.linkedin.com/in/alessandro-macaro-391b7a214/">Alessandro Macaro</a></p><br>|
