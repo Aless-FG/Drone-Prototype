@@ -60,13 +60,6 @@ void setup() {
     Serial.println("Communication failed!");
     while(true);
   }
-  
-  //Serial.println("Connecting...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    digitalWrite(LED_PIN, LOW);
-  }
-  digitalWrite(LED_PIN, HIGH);
 
   /*Serial.println("\n");
   Serial.println("Connected!");
@@ -129,6 +122,12 @@ void loop() {
   float x_gyro, y_gyro, z_gyro;
   float t;
   WiFiClient client = wifiServer.available();
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    digitalWrite(LED_PIN, LOW);
+  }
+  digitalWrite(LED_PIN, HIGH);
   
   // Turn on motors
 	digitalWrite(in1, LOW);
