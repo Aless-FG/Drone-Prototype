@@ -41,7 +41,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1220,
+        "x": 1140,
         "y": 280,
         "wires": []
     },
@@ -62,7 +62,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1220,
+        "x": 1140,
         "y": 340,
         "wires": []
     },
@@ -79,7 +79,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 980,
+        "x": 900,
         "y": 180,
         "wires": []
     },
@@ -130,7 +130,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1200,
+        "x": 1120,
         "y": 400,
         "wires": []
     },
@@ -151,7 +151,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1180,
+        "x": 1100,
         "y": 520,
         "wires": []
     },
@@ -172,7 +172,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1180,
+        "x": 1100,
         "y": 560,
         "wires": []
     },
@@ -193,7 +193,7 @@
         "font": "Times New Roman,Times,serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 1180,
+        "x": 1100,
         "y": 600,
         "wires": []
     },
@@ -427,7 +427,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 260,
         "wires": [
             [
@@ -447,7 +447,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 300,
         "wires": [
             [
@@ -467,7 +467,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 340,
         "wires": [
             [
@@ -487,7 +487,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 560,
         "wires": [
             [
@@ -507,7 +507,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 480,
         "wires": [
             [
@@ -527,7 +527,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 990,
+        "x": 910,
         "y": 520,
         "wires": [
             [
@@ -541,7 +541,7 @@
         "z": "a592c8e6dc4662de",
         "name": "acc",
         "info": "acceleration values",
-        "x": 1170,
+        "x": 1090,
         "y": 240,
         "wires": []
     },
@@ -551,7 +551,7 @@
         "z": "a592c8e6dc4662de",
         "name": "gyro",
         "info": "gyroscope values",
-        "x": 1310,
+        "x": 1230,
         "y": 540,
         "wires": []
     },
@@ -571,7 +571,7 @@
         "z": "a592c8e6dc4662de",
         "name": "",
         "server": "client",
-        "host": "192.168.108.178",
+        "host": "192.168.1.143",
         "port": "8000",
         "datamode": "stream",
         "datatype": "utf8",
@@ -580,7 +580,7 @@
         "trim": false,
         "base64": false,
         "tls": "",
-        "x": 130,
+        "x": 120,
         "y": 160,
         "wires": [
             [
