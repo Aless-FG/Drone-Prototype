@@ -3,6 +3,7 @@
 #include <MadgwickAHRS.h>
 #include <PID_v1.h>
 #include <WiFiNINA.h>
+#define LED_PIN 13
 
 // Motor A connections
 int enA = 9;
@@ -36,8 +37,8 @@ PID rollPID(&pitchInput, &pitchOutput, &pitchSetpoint, consKp, consKi, consKd, D
 Madgwick filter;
 
 // Connection section
-const char* ssid = "AndroidAP_1632";
-const char* password = "forzafoggia";
+const char* ssid = "WiFi-LabIoT";
+const char* password = "s1jzsjkw5b";
 const uint16_t port = 8000;
 WiFiServer wifiServer(port);
 
@@ -51,6 +52,7 @@ void setup() {
   rollSetpoint = 0.0;
   pitchPID.SetMode(AUTOMATIC);
   rollPID.SetMode(AUTOMATIC);
+  pinMode(LED_PIN, OUTPUT);
 
   WiFi.begin(ssid,password);
 
@@ -59,18 +61,19 @@ void setup() {
     while(true);
   }
   
-  /*
-  Serial.println("Connecting...");
+  //Serial.println("Connecting...");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    digitalWrite(LED_PIN, LOW);
   }
-  
-  Serial.println("\n");
+  digitalWrite(LED_PIN, HIGH);
+
+  /*Serial.println("\n");
   Serial.println("Connected!");
   Serial.println("IP: ");
   Serial.println(WiFi.localIP());
   */
+  
   wifiServer.begin();
 
   pitchPID.SetOutputLimits(-20, 20);
