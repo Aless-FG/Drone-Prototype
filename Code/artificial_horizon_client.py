@@ -9,9 +9,9 @@ FPS = 60
 scale_factor = 7
 
 screen = pygame.display.set_mode(size)
-frame = pygame.image.load("./Frame.png").convert_alpha()
-inel = pygame.image.load("./Ring.png").convert_alpha()
-interior = pygame.image.load("./Interior.png").convert_alpha()
+frame = pygame.image.load(".\Frame.png").convert_alpha()
+inel = pygame.image.load(".\Ring.png").convert_alpha()
+interior = pygame.image.load(".\Interior.png").convert_alpha()
 
 def blitRotateCenter(surf, image, topleft, angle):
     rotated_image = pygame.transform.rotate(image, angle)
@@ -27,14 +27,13 @@ def draw_window(set_pitch, set_roll, scale_factor = 1):
 
 
 if __name__ == '__main__':
-    host = "192.168.108.178"  # as both code is running on same pc
+    host = "192.168.1.143"  # as both code is running on same pc
     port = 8000  # socket server port number
 
     client_socket = socket.socket()  # instantiate
     client_socket.connect((host, port))  # connect to the server
 
     message = input(" -> ")  # take input
-
 
     while message.lower().strip() != 'bye':
         client_socket.send(message.encode())  # send message
@@ -50,14 +49,3 @@ if __name__ == '__main__':
 
 
     client_socket.close()  # close the connection
-
-
-
-
-
-
-
-
-
-
-

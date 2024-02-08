@@ -8,6 +8,266 @@
         "env": []
     },
     {
+        "id": "752673eda6bc2d3e",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "COM4",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "78c63c230494a2b1",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c97439f93936bcfa",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#cc0000",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "Georgia,Georgia,serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#cc0000",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#cc0000",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#ff1a1a",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#cc0000",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Dashboard Drone",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 60,
+                "sy": 60,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c6c7f744037bff18",
+        "type": "ui_group",
+        "name": "Accelerometro",
+        "tab": "78c63c230494a2b1",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1fa379f19deb1cb0",
+        "type": "ui_group",
+        "name": "Giroscopio",
+        "tab": "78c63c230494a2b1",
+        "order": 2,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b804d19f436d6eaa",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "78c63c230494a2b1",
+        "order": 3,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e028f0aa6a00d068",
+        "type": "ui_group",
+        "name": "Motori_SX",
+        "tab": "78c63c230494a2b1",
+        "order": 4,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b09b81a45d193753",
+        "type": "ui_spacer",
+        "z": "a592c8e6dc4662de",
+        "name": "spacer",
+        "group": "1bf85c946849c491",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "139cbec46d596660",
+        "type": "ui_group",
+        "name": "Motori_DX",
+        "tab": "78c63c230494a2b1",
+        "order": 5,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9eefe3ad31223241",
+        "type": "ui-base",
+        "name": "UI Name",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false
+    },
+    {
+        "id": "41cd17b3a4ec1664",
+        "type": "ui-theme",
+        "name": "Theme Name",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#6d9db0",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "9fc663c4f6ebaafd",
+        "type": "ui-page",
+        "name": "Page Name",
+        "ui": "9eefe3ad31223241",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "41cd17b3a4ec1664",
+        "order": -1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "65f5a674fc4cb2b4",
+        "type": "ui-group",
+        "name": "Group Name",
+        "page": "9fc663c4f6ebaafd",
+        "width": "6",
+        "height": "1",
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "6b359c6b41b88d93",
+        "type": "websocket-listener",
+        "path": "",
+        "wholemsg": "false"
+    },
+    {
+        "id": "aa3e0b3e0c8afded",
+        "type": "websocket-listener",
+        "path": "",
+        "wholemsg": "false"
+    },
+    {
         "id": "63231ea80eccece3",
         "type": "debug",
         "z": "a592c8e6dc4662de",
@@ -589,110 +849,5 @@
                 "f8d4cb5e18ce1924"
             ]
         ]
-    },
-    {
-        "id": "9658a87a2282c19e",
-        "type": "serial in",
-        "z": "a592c8e6dc4662de",
-        "name": "test",
-        "serial": "752673eda6bc2d3e",
-        "x": 1050,
-        "y": 760,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b09b81a45d193753",
-        "type": "ui_spacer",
-        "z": "a592c8e6dc4662de",
-        "name": "spacer",
-        "group": "1bf85c946849c491",
-        "order": 5,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "c6c7f744037bff18",
-        "type": "ui_group",
-        "name": "Accelerometro",
-        "tab": "78c63c230494a2b1",
-        "order": 1,
-        "disp": true,
-        "width": 8,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "1fa379f19deb1cb0",
-        "type": "ui_group",
-        "name": "Giroscopio",
-        "tab": "78c63c230494a2b1",
-        "order": 2,
-        "disp": true,
-        "width": 8,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "b804d19f436d6eaa",
-        "type": "ui_group",
-        "name": "Temperatura",
-        "tab": "78c63c230494a2b1",
-        "order": 3,
-        "disp": true,
-        "width": 8,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "139cbec46d596660",
-        "type": "ui_group",
-        "name": "Motori_DX",
-        "tab": "78c63c230494a2b1",
-        "order": 5,
-        "disp": true,
-        "width": "8",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "e028f0aa6a00d068",
-        "type": "ui_group",
-        "name": "Motori_SX",
-        "tab": "78c63c230494a2b1",
-        "order": 4,
-        "disp": true,
-        "width": "8",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "752673eda6bc2d3e",
-        "type": "serial-port",
-        "name": "",
-        "serialport": "COM4",
-        "serialbaud": "9600",
-        "databits": "8",
-        "parity": "none",
-        "stopbits": "1",
-        "waitfor": "",
-        "dtr": "none",
-        "rts": "none",
-        "cts": "none",
-        "dsr": "none",
-        "newline": "\\n",
-        "bin": "false",
-        "out": "char",
-        "addchar": "",
-        "responsetimeout": "10000"
-    },
-    {
-        "id": "78c63c230494a2b1",
-        "type": "ui_tab",
-        "name": "Home",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
     }
 ]
